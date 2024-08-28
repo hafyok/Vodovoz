@@ -1,21 +1,32 @@
 package com.example.vodovoz
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.example.vodovoz.Network.RetrofitClient
+import com.example.vodovoz.Network.VodovozApi
 import com.example.vodovoz.ui.theme.VodovozTheme
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val api = RetrofitClient.getInstance().create(VodovozApi::class.java)
+        GlobalScope.launch {
+            try {
+                val response = api.getItems("topglav")
+                Log.d("VodovozOk", response.TOVARY.toString())
+            }catch (e: Exception){
+                Log.d("VodovozError", e.toString())
+            }
+        }
         enableEdgeToEdge()
         setContent {
             VodovozTheme {
@@ -26,21 +37,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    VodovozTheme {
-        Greeting("Android")
     }
 }

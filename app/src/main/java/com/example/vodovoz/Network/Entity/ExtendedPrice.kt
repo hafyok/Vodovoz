@@ -1,4 +1,4 @@
-package com.example.vodovoz.Network
+package com.example.vodovoz.Network.Entity
 
 import com.google.gson.annotations.SerializedName
 

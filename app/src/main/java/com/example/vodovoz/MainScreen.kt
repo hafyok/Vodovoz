@@ -1,5 +1,6 @@
 package com.example.vodovoz
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
@@ -13,15 +14,23 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun MainScreen(categories: List<String>, prices: List<Int>, modifier: Modifier = Modifier) {
-    Column {
+    Column(modifier = Modifier.padding(vertical = 16.dp)) {
         LazyRow(modifier = Modifier.padding(8.dp)) {
             items(categories) { category ->
-                Text(text = category, modifier = Modifier.padding(horizontal = 16.dp))
+                Text(text = category, modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .clickable(
+                        onClick = {
+                            //TODO()
+                        }
+                    ))
             }
         }
         LazyRow(modifier = Modifier.padding(8.dp)) {
             items(prices) { price ->
-                Text(text = price.toString(), Modifier.padding(horizontal = 16.dp))
+                //Text(text = price.toString(), Modifier.padding(horizontal = 16.dp))
+                TovarItem()
+                //TovarItem()
             }
         }
     }

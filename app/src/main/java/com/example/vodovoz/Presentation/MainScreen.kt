@@ -1,4 +1,4 @@
-package com.example.vodovoz
+package com.example.vodovoz.Presentation
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -8,12 +8,16 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun MainScreen(categories: List<String>, prices: List<Int>, modifier: Modifier = Modifier) {
+fun MainScreen(
+    viewModel: MainViewModel,
+    categories: List<String>,
+    prices: List<Int>,
+    modifier: Modifier = Modifier
+) {
     Column(modifier = Modifier.padding(vertical = 16.dp)) {
         LazyRow(modifier = Modifier.padding(8.dp)) {
             items(categories) { category ->
@@ -36,6 +40,7 @@ fun MainScreen(categories: List<String>, prices: List<Int>, modifier: Modifier =
     }
 }
 
+/*
 @Composable
 @Preview(showSystemUi = true)
 fun PreviewMainScreen() {
@@ -43,4 +48,4 @@ fun PreviewMainScreen() {
     val prices =
         listOf(640, 360, 2140, 640, 360, 2140, 640, 360, 2140, 640, 360, 2140, 640, 360, 2140)
     MainScreen(categories, prices)
-}
+}*/

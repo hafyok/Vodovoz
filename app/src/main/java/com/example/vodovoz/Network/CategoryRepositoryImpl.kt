@@ -11,21 +11,21 @@ class CategoryRepositoryImpl(private val coroutineDispatcher: CoroutineDispatche
     val api = RetrofitClient.getInstance().create(VodovozApi::class.java)
 
     override fun getCategories(items: Items): List<String> {
-        val names = items.TOVARY.map { it.NAME.toString() }
+        val names = items.TOVARY.mapNotNull { it.NAME }
         Log.d("VodovozNames", names.toString())
         return names
     }
 
-    suspend fun getItems() {
-        withContext(coroutineDispatcher) {
+    suspend fun getItems(): Items {
+        return withContext(coroutineDispatcher) {
             try {
                 val response = api.getItems("topglav")
                 Log.d("VodovozOk", response.TOVARY.toString())
+                response
             } catch (e: Exception) {
                 Log.d("VodovozError", e.toString())
+                Items() // Возвращаем пустой Items в случае ошибки
             }
-
-
         }
     }
 }

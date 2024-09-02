@@ -19,10 +19,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             VodovozTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    val categories = listOf("Вода", "Кулеры", "Выбор покупателей")
                     val prices = listOf(640, 360, 2140)
                     val viewModel = MainViewModel()
-                    MainScreen(viewModel, categories, prices, Modifier.padding(innerPadding))
+                    MainScreen(viewModel, Modifier.padding(innerPadding))
                 }
             }
         }

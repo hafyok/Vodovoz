@@ -10,13 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.vodovoz.R
 
-@Preview(showSystemUi = true)
 @Composable
-fun TovarItem() {
+fun TovarItem(price: Int) {
     Column(modifier = Modifier.padding(8.dp)) {
         Row() {
             Image(
@@ -31,7 +29,7 @@ fun TovarItem() {
             contentDescription = null
         )
         Row(/*modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End*/) {
-            Text(text = "640 Р")
+            Text(text = price.toString())
             Image(
                 painter = painterResource(id = R.drawable.ic_launcher_foreground),
                 contentDescription = null,

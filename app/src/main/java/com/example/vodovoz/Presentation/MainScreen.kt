@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
@@ -14,10 +15,19 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun MainScreen(
     viewModel: MainViewModel,
-    categories: List<String>,
-    prices: List<Int>,
     modifier: Modifier = Modifier
 ) {
+    val categories = viewModel.categories.collectAsState().value
+    val prices = mutableListOf<Int>()
+
+    viewModel.items.collectAsState().value.TOVARY.forEach { tovary ->
+        tovary.data.forEach { tovaryData ->
+            tovaryData.EXTENDEDPRICE.forEach { extendedPrice ->
+                extendedPrice.PRICE?.let { prices.add(it) }
+            }
+        }
+    }
+
     Column(modifier = Modifier.padding(vertical = 16.dp)) {
         LazyRow(modifier = Modifier.padding(8.dp)) {
             items(categories) { category ->
@@ -33,7 +43,7 @@ fun MainScreen(
         LazyRow(modifier = Modifier.padding(8.dp)) {
             items(prices) { price ->
                 //Text(text = price.toString(), Modifier.padding(horizontal = 16.dp))
-                TovarItem()
+                TovarItem(price)
                 //TovarItem()
             }
         }

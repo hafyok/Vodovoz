@@ -1,6 +1,5 @@
 package com.example.vodovoz.Presentation
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -72,9 +71,9 @@ fun CategoryChips(
                 },
                 modifier = Modifier.padding(horizontal = 4.dp),
                 colors = FilterChipDefaults.filterChipColors(
-                        selectedContainerColor = Color.Blue,
-                        selectedLabelColor = Color.Gray,
-                        containerColor = Color.Cyan,
+                        selectedContainerColor = Color.Gray,
+                        selectedLabelColor = Color.Black,
+                        containerColor = Color.White,
                         labelColor = Color.Black
                     )
 

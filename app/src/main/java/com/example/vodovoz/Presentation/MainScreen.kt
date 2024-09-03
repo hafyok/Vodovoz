@@ -10,8 +10,10 @@ import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -23,33 +25,23 @@ fun MainScreen(
     modifier: Modifier = Modifier
 ) {
     val categories = viewModel.categories.collectAsState().value
-    val prices = mutableListOf<Int>()
     val selectedCategory = remember { mutableStateOf<String?>(null) }
-    val tovar = viewModel.getTovar("Выбор покупателей")
-
-    /*viewModel.items.collectAsState().value.TOVARY.forEach { tovary ->
-        tovary.data.forEach { tovaryData ->
-            tovaryData.EXTENDEDPRICE.forEach { extendedPrice ->
-                extendedPrice.PRICE?.let { prices.add(it) }
-            }
-        }
-    }*/
+    var tovar by remember { mutableStateOf(viewModel.getTovar("Выбор покупателей")) }
 
     Column(modifier = Modifier.padding(vertical = 16.dp)) {
+        // Категории
         CategoryChips(
             categories = categories,
             selectedCategory = selectedCategory.value,
             onCategorySelected = { category ->
                 selectedCategory.value = category
-                //viewModel.loadDataForCategory(category) // передача выбранной категории во ViewModel
+                tovar = viewModel.getTovar(category)
             }
         )
 
         LazyRow(modifier = Modifier.padding(8.dp)) {
             items(tovar) { t ->
-                //Text(text = price.toString(), Modifier.padding(horizontal = 16.dp))
                 TovarItem(t)
-                //TovarItem()
             }
         }
     }

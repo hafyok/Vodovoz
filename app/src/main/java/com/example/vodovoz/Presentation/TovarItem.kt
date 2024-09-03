@@ -28,7 +28,7 @@ fun TovarItem(tovary: Pair<Int, String?>) {
             painter = painterResource(id = R.drawable.ic_launcher_background),
             contentDescription = null
         )
-        Row(/*modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End*/) {
+        Row() {
             Text(text = tovary.first.toString())
             Image(
                 painter = painterResource(id = R.drawable.ic_launcher_foreground),

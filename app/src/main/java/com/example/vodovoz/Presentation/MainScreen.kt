@@ -25,14 +25,15 @@ fun MainScreen(
     val categories = viewModel.categories.collectAsState().value
     val prices = mutableListOf<Int>()
     val selectedCategory = remember { mutableStateOf<String?>(null) }
+    val tovar = viewModel.getTovar("Выбор покупателей")
 
-    viewModel.items.collectAsState().value.TOVARY.forEach { tovary ->
+    /*viewModel.items.collectAsState().value.TOVARY.forEach { tovary ->
         tovary.data.forEach { tovaryData ->
             tovaryData.EXTENDEDPRICE.forEach { extendedPrice ->
                 extendedPrice.PRICE?.let { prices.add(it) }
             }
         }
-    }
+    }*/
 
     Column(modifier = Modifier.padding(vertical = 16.dp)) {
         CategoryChips(
@@ -45,9 +46,9 @@ fun MainScreen(
         )
 
         LazyRow(modifier = Modifier.padding(8.dp)) {
-            items(prices) { price ->
+            items(tovar) { t ->
                 //Text(text = price.toString(), Modifier.padding(horizontal = 16.dp))
-                TovarItem(price)
+                TovarItem(t)
                 //TovarItem()
             }
         }

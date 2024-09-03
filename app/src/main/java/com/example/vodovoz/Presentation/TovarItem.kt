@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.example.vodovoz.R
 
 @Composable
-fun TovarItem(price: Int) {
+fun TovarItem(tovary: Pair<Int, String?>) {
     Column(modifier = Modifier.padding(8.dp)) {
         Row() {
             Image(
@@ -29,7 +29,7 @@ fun TovarItem(price: Int) {
             contentDescription = null
         )
         Row(/*modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End*/) {
-            Text(text = price.toString())
+            Text(text = tovary.first.toString())
             Image(
                 painter = painterResource(id = R.drawable.ic_launcher_foreground),
                 contentDescription = null,
